@@ -1,15 +1,20 @@
-import { CategoryNav } from "./cases/categories/components/category-nav"
-import { Header } from "./components/Layout/header"
+import { Navigate, Route, Routes } from "react-router-dom"
+import { AppLayout } from "./components/Layout/app-layout"
+import { ProductPage } from "./pages/products/product-page"
+
 
 
 function App() {
  
 
   return (
-    <>
-    <Header />
-    <CategoryNav />
-    </>
+    <Routes>
+      <Route element={<AppLayout />}>
+        <Route index element={<Navigate to="products" replace />} /> 
+        <Route path="products" element={<ProductPage />} />
+      
+      </Route>
+    </Routes>
   )
 }
 

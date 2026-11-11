@@ -7,3 +7,12 @@ export function useCategories(){
         queryFn: CategoryService.listAll
     })
 }
+
+export function useCategory(id: string){
+    return useQuery({
+        queryKey: ['category', id],
+        queryFn: () => CategoryService.findOne(id),
+        enabled: !!id //só vou disparar a query se o id for diferente de null ou undefined. Dá para fazer assim ou Boolean(id)
+                    // as !! transformam o id em um booleano, se for null ou undefined, será false, caso contrário será true
+    })
+}
