@@ -1,10 +1,11 @@
 import { useCategory } from "@/cases/categories/hooks/use-category";
+import { ProductList } from "@/cases/products/components/product-list";
 import { useSearchParams } from "react-router-dom";
 
 export function ProductPage() {
 
     const [searchParams] = useSearchParams();
-    const categoryId = searchParams.get('categoryId');
+    const categoryId = searchParams.get('categoryId') ?? undefined; // se não tiver categoryId, vai ser undefined, assim a query não vai disparar e não vai dar erro;
 
     const { data: selectedCategory} = useCategory(categoryId ?? '') // se o categoryId for null ou undefined, vou passar uma string vazia para a query, assim ela não vai disparar a query e não vai dar erro;
 
@@ -17,6 +18,8 @@ export function ProductPage() {
             </h2>
 
             ) }
+
+            <ProductList categoryId={categoryId}/>
             
         </div>
     )

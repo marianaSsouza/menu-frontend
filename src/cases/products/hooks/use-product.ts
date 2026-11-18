@@ -1,10 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
 import { ProductService } from "../services/product-service";
 
-export function useProducts() {
+export function useProducts(categoryId ?: string) {
     return useQuery({
-        queryKey: ['products'], //esse é o identificador único da query, que será usado para armazenar e recuperar os dados em cache
-        queryFn: ProductService.listAll //essa função é responsável por buscar todos os produtos
+        queryKey: ['products', categoryId], //esse é o identificador único da query, que será usado para armazenar e recuperar os dados em cache
+        queryFn: () => ProductService.listAll(categoryId) //essa função é responsável por buscar todos os produtos. Coloco o () => para que a função seja executada apenas quando a query for chamada, e não na hora de definir a query.
     })
 }
 
